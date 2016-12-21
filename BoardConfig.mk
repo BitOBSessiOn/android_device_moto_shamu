@@ -71,14 +71,6 @@ WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_BUS := PCIE
 #BOARD_USES_SECURE_SERVICES := true
 
-# Bluetooth defines
-BOARD_HAVE_BLUETOOTH_BCM := true
-ifeq ($(TARGET_PRODUCT),bt_shamu)
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/moto/shamu/bluetooth_extra
-else
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/moto/shamu/bluetooth
-endif
-
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := msm8084
 TARGET_BOOTLOADER_BOARD_NAME := shamu
@@ -140,52 +132,47 @@ BOARD_USES_QC_TIME_SERVICES := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen   \
-    device/moto/shamu/cmhw
+# Removed to build MultiROM...
+#USE_CLANG_PLATFORM_BUILD := true
 
-USE_CLANG_PLATFORM_BUILD := true
+#-include vendor/motorola/shamu/BoardConfigVendor.mk
 
--include vendor/motorola/shamu/BoardConfigVendor.mk
-
-# Blissful Building Options
-BLISS_BUILD_BLOCK := 1
-BLISSIFY := true
-BLISS_O3 := true
-BLISS_GRAPHITE := true
-BLISS_STRICT := true
-BLISS_KRAIT := true
-FLOOP_NEST_OPTIMIZE := true
-ENABLE_GCCONLY := true
-BLISS_PIPE := true
-BLISS_PTHREAD := true
-BLISS_GOMP := true
-BLISS_EXTRAGCC := true
-BLISS_SANITIZE := true
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
-FAST_MATH := true
-ENABLE_MODULAR_O3 := true
-ENABLE_LTO := true
-LINK_TIME_OPTIMIZATIONS := true
-TARGET_USE_ION_COMPAT := true
-TARGET_USE_KRAIT_PLD_SET := true
-#WITH_LZMA_OTA := true
-TARGET_TC_ROM := 6.1-sm
-TARGET_TC_KERNEL := 6.x-HYPER-linaro
+# Bliss
+TARGET_TC_ROM := 4.9
+TARGET_TC_KERNEL := 4.9-linaro
 TARGET_GCC_VERSION_EXP := $(TARGET_TC_ROM)
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := $(TARGET_TC_KERNEL)
 
-ifneq ($(filter 5.% 6.%,$(TARGET_TC_ROM)),)
-ifeq ($(strip $(BLISS_GRAPHITE)),true)
-  LOCAL_DISABLE_GRAPHITE := \
-    camera.hammerhead
-endif
-endif
+# TWRP
+RECOVERY_VARIANT := twrp
+DEVICE_RESOLUTION := 1440x2560
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_L_CRYPTO := true
+BOARD_HAS_NO_REAL_SDCARD := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
+TW_SCREEN_BLANK_ON_BOOT := true
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_EXTRA_LANGUAGES := true
 
-ifeq ($(strip $(BLISS_STRICT)),true)
-  LOCAL_DISABLE_STRICT := \
-    libmmcamera_interface \
-    camera.shamu
-endif
+# MultiROM config. MultiROM also uses parts of TWRP config
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := device/moto/shamu/multirom/mr_init_devices.c
+MR_DPI := xxhdpi
+MR_DPI_FONT := 435
+MR_USE_MROM_FSTAB := true
+MR_FSTAB := device/moto/shamu/twrp.fstab
+MR_KEXEC_MEM_MIN := 0x20000000
+MR_KEXEC_DTB := true
+#MR_INFOS := device/moto/shamu/multirom/infos
+MR_DEVICE_HOOKS := device/moto/shamu/multirom/mr_hooks.c
+MR_DEVICE_HOOKS_VER := 5
+MR_PIXEL_FORMAT := "RGBX_8888"
+MR_ENCRYPTION := true
+MR_ENCRYPTION_SETUP_SCRIPT := device/moto/shamu/multirom/mr_cp_crypto.sh
+MR_USE_QCOM_OVERLAY := true
+MR_QCOM_OVERLAY_HEADER := device/moto/shamu/multirom/mr_qcom_overlay.h
+MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_RGBX_8888
+TARGET_RECOVERY_IS_MULTIROM := true
+
+
