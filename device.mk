@@ -31,13 +31,13 @@ PRODUCT_COPY_FILES := \
 
 PRODUCT_COPY_FILES += \
     device/moto/shamu/twrp.fstab:recovery/root/etc/twrp.fstab \
-    device/moto/shamu/vendor/firmware/keymaster/keymaster.b00:recovery/root/vendor/firmware/keymaster/keymaster.b00 \
-    device/moto/shamu/vendor/firmware/keymaster/keymaster.b01:recovery/root/vendor/firmware/firmware/keymaster/firmware/keymaster.b01 \
-    device/moto/shamu/vendor/firmware/keymaster/keymaster.b02:recovery/root/vendor/firmware/firmware/keymaster/firmware/keymaster.b02 \
-    device/moto/shamu/vendor/firmware/keymaster/keymaster.b03:recovery/root/vendor/firmware/firmware/keymaster/firmware/keymaster.b03 \
-    device/moto/shamu/vendor/firmware/keymaster/keymaster.mdt:recovery/root/vendor/firmware/keymaster/keymaster.mdt \
-    device/moto/shamu/vendor/lib/libQSEEComAPI.so:recovery/root/sbin/libQSEEComAPI.so \
-    device/moto/shamu/vendor/lib/hw/keystore.msm8084.so::recovery/root/vendor/lib/hw/keystore.msm8084.so
+    device/moto/shamu/vendor/keymaster.b00:recovery/root/vendor/firmware/keymaster/keymaster.b00 \
+    device/moto/shamu/vendor/keymaster.b01:recovery/root/vendor/firmware/firmware/keymaster/firmware/keymaster.b01 \
+    device/moto/shamu/vendor/keymaster.b02:recovery/root/vendor/firmware/firmware/keymaster/firmware/keymaster.b02 \
+    device/moto/shamu/vendor/keymaster.b03:recovery/root/vendor/firmware/firmware/keymaster/firmware/keymaster.b03 \
+    device/moto/shamu/vendor/keymaster.mdt:recovery/root/vendor/firmware/keymaster/keymaster.mdt \
+    device/moto/shamu/vendor/libQSEEComAPI.so:recovery/root/sbin/libQSEEComAPI.so \
+    device/moto/shamu/vendor/keystore.msm8084.so::recovery/root/vendor/lib/hw/keystore.msm8084.so
     
 PRODUCT_COPY_FILES += \
     device/moto/shamu/init.shamu.rc:root/init.shamu.rc \
