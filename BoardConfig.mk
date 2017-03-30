@@ -188,7 +188,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_NO_SCREEN_BLANK := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_DEVICE_VERSION := 2
+TW_DEVICE_VERSION := 1
 
 # MultiROM config. MultiROM also uses parts of TWRP config
 MR_INPUT_TYPE := type_b
@@ -212,7 +212,7 @@ MR_NO_KEXEC := true
 MR_DEVICE_SPECIFIC_VERSION := b
 MR_ALLOW_NKK71_NOKEXEC_WORKAROUND := true
 
-include device/common/version-info/MR_REC_VERSION.mk
+include device/moto/shamu/multirom/version/MR_REC_VERSION.mk
 
 ifeq ($(MR_REC_VERSION),)
 MR_REC_VERSION := $(shell date -u +%Y%m%d)-01
